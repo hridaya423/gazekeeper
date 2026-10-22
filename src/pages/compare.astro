@@ -1,0 +1,142 @@
+---
+import SiteShell from "../layouts/SiteShell.astro";
+import PageHero from "../components/common/PageHero.astro";
+import Section from "../components/common/Section.astro";
+import CtaBand from "../components/common/CtaBand.astro";
+import Faq from "../components/common/Faq.astro";
+import { CONTACT_EMAIL } from "../utils/site";
+import { COMPARISON_APPS } from "../utils/compare";
+
+const faqs = [
+  {
+    q: "Is a free alternative good enough?",
+    a: "For many people, yes. A break you take in any app beats one you skip while waiting for this one.",
+  },
+  {
+    q: "How current are these tables?",
+    a: `The competitor columns come from each app’s public pages, checked on 21 October 2026. If something here is out of date, email ${CONTACT_EMAIL} and we will fix it.`,
+  },
+];
+---
+
+<SiteShell
+  title="GazeKeeper compared with Stretchly, Time Out and LookAway"
+  description="A plain comparison of GazeKeeper with Stretchly, Time Out and LookAway: price, platforms, break types and what each holds a break for."
+>
+  <PageHero
+    title="GazeKeeper, next to three other break apps."
+    subtext="Each one is worth using if it fits you better."
+  />
+
+  {
+    COMPARISON_APPS.map((app) => (
+      <Section title={`GazeKeeper and ${app.name}`} subtext={app.verdict}>
+        <table>
+          <caption class="sr-only">GazeKeeper compared with {app.name}</caption>
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">GazeKeeper</th>
+              <th scope="col">{app.name}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {app.rows.map((row) => (
+              <tr>
+                <th scope="row">{row.feature}</th>
+                <td data-label="GazeKeeper">{row.gazekeeper}</td>
+                <td data-label={app.name}>{row.others}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Section>
+    ))
+  }
+
+  <Section title="The fine print">
+    <Faq items={faqs} />
+  </Section>
+
+  <CtaBand title="Decide with your own eyes." subtext="It is free. Try it for a day." />
+</SiteShell>
+
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: 1.5px solid var(--ink);
+  }
+
+  th,
+  td {
+    padding: 18px 24px 18px 0;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  thead th {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+
+  tbody th {
+    width: 22%;
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+
+  td {
+    width: 39%;
+    color: var(--ink-2);
+  }
+
+  td:nth-child(2) {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  @media (max-width: 720px) {
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+    }
+
+    tbody th,
+    td {
+      display: block;
+      width: auto;
+      padding: 0;
+      border: none;
+    }
+
+    tbody tr {
+      display: block;
+      padding-block: 18px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    tbody th {
+      margin-bottom: 8px;
+    }
+
+    td + td {
+      margin-top: 6px;
+    }
+
+    td::before {
+      content: attr(data-label);
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--ink-3);
+    }
+  }
+</style>

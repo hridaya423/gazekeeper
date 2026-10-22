@@ -1,0 +1,49 @@
+---
+import SiteShell from "../layouts/SiteShell.astro";
+import PageHero from "../components/common/PageHero.astro";
+import { CONTACT_EMAIL, DEVELOPER } from "../utils/site";
+---
+
+<SiteShell title="Terms of Service — GazeKeeper" description="The terms for using the GazeKeeper app and this website.">
+  <PageHero title="Terms of service" subtext="Plain terms for using GazeKeeper and this site." />
+
+  <section class="page legal">
+    <div class="prose">
+      <p class="mono">Last updated: October 2026</p>
+
+      <h2>The app</h2>
+      <p>
+        GazeKeeper is made by {DEVELOPER}. It is free to download and use on any Mac you control. You may not resell it or
+        redistribute it as your own. You may not reverse-engineer it, except where the law allows it.
+      </p>
+
+      <h2>Health disclaimer</h2>
+      <p>
+        GazeKeeper is a comfort and productivity tool. It is not a medical device, and nothing in it is medical advice.
+        If you have eye discomfort that does not go away, see an eye care professional. The 20-20-20 habit is a widely
+        shared guideline, not a treatment.
+      </p>
+
+      <h2>Availability</h2>
+      <p>
+        GazeKeeper requires macOS 14 or later. The app checks for updates and installs them through its built-in
+        updater. See the <a href="/privacy">privacy policy</a> for what that check involves.
+      </p>
+
+      <h2>No warranty and liability</h2>
+      <p>
+        The app and this site are provided "as is", without warranty of any kind. To the extent the law allows, the
+        developer is not liable for any loss or damage that results from using them.
+      </p>
+
+      <h2>Contact</h2>
+      <p>Questions about these terms: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    </div>
+  </section>
+</SiteShell>
+
+<style>
+  .legal {
+    padding-block: clamp(48px, 6vw, 88px);
+  }
+</style>

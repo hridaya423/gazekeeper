@@ -1,0 +1,115 @@
+---
+import SiteShell from "../layouts/SiteShell.astro";
+import PageHero from "../components/common/PageHero.astro";
+import Section from "../components/common/Section.astro";
+import CtaBand from "../components/common/CtaBand.astro";
+import appIcon from "../../gazekeeper/Resources/Assets.xcassets/AppIcon.appiconset/icon_512x512@2x.png";
+import { CONTACT_EMAIL, CURRENT_VERSION, DEVELOPER, MACOS_REQUIREMENT, SITE_URL } from "../utils/site";
+
+const facts = [
+  { label: "Product", value: "GazeKeeper, a break reminder for the Mac" },
+  { label: "Developer", value: DEVELOPER },
+  { label: "Version", value: `${CURRENT_VERSION}, ${MACOS_REQUIREMENT} or later` },
+  { label: "Price", value: "Free. No account, no subscription." },
+  { label: "Data", value: "Settings and stats stay on the Mac. The only network request is the update check." },
+  { label: "Website", value: SITE_URL.replace("https://", "") },
+];
+
+const boilerplate = `GazeKeeper is a free break reminder for macOS by ${DEVELOPER}. By default, every 20 minutes it asks for 20 seconds of looking into the distance. It holds the break while the camera, microphone, screen sharing or a fullscreen app is in use, and lands it at the next pause in typing. It can also pause in a Focus and move a break ahead of a calendar meeting. Settings and stats stay on the Mac; the only network request is the update check.`;
+---
+
+<SiteShell
+  title="Press kit — GazeKeeper"
+  description="Facts, a short description and the app icon for anyone writing about GazeKeeper."
+>
+  <PageHero title="Press kit." subtext="Facts, a short description and the app icon, for anyone writing about GazeKeeper." />
+
+  <Section title="Facts">
+    <dl class="rows">
+      {
+        facts.map((f) => (
+          <div>
+            <dt class="mono">{f.label}</dt>
+            <dd>{f.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <Section title="Description" subtext="Free to quote in full or in part.">
+    <p class="boilerplate" id="boilerplate">{boilerplate}</p>
+    <button type="button" class="btn btn-quiet" id="copy-boilerplate" aria-live="polite">Copy text</button>
+  </Section>
+
+  <Section title="App icon" subtext="The icon as it ships in the app, 1024 by 1024 pixels.">
+    <div class="icon-row">
+      <img src={appIcon.src} width="160" height="160" alt="The GazeKeeper app icon: a teal ring around a dot." />
+      <a class="btn btn-quiet" href={appIcon.src} download="GazeKeeper-icon.png">Download the PNG</a>
+    </div>
+  </Section>
+
+  <Section title="Anything else" subtext="Screenshots, other sizes or a question about how it works.">
+    <a class="link mail" href={`mailto:${CONTACT_EMAIL}?subject=GazeKeeper%20press%20inquiry`}>{CONTACT_EMAIL}</a>
+  </Section>
+
+  <CtaBand />
+</SiteShell>
+
+<script>
+  const button = document.getElementById("copy-boilerplate");
+  const text = document.getElementById("boilerplate");
+
+  button?.addEventListener("click", async () => {
+    await navigator.clipboard.writeText(text?.textContent ?? "");
+    button.textContent = "Copied";
+    setTimeout(() => (button.textContent = "Copy text"), 1500);
+  });
+</script>
+
+<style>
+  .rows {
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .rows div {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) 3fr;
+    gap: 8px 32px;
+    padding-block: 18px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rows dd {
+    max-width: var(--measure);
+  }
+
+  .boilerplate {
+    max-width: var(--measure);
+    margin-bottom: 28px;
+    font-size: 19px;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+
+  .icon-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px 40px;
+  }
+
+  .icon-row img {
+    border-radius: 36px;
+  }
+
+  .mail {
+    font-size: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .rows div {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

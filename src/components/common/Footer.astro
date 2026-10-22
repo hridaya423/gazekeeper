@@ -1,0 +1,112 @@
+---
+import Mark from "./Mark.astro";
+import { CONTACT_EMAIL, CURRENT_VERSION, MACOS_REQUIREMENT } from "../../utils/site";
+
+const columns = [
+  {
+    title: "Product",
+    links: [
+      { href: "/download", label: "Download" },
+      { href: "/docs", label: "Documentation" },
+      { href: "/compare", label: "Compare" },
+      { href: "/press-kit", label: "Press kit" },
+    ],
+  },
+  {
+    title: "Your eyes",
+    links: [
+      { href: "/20-20-20-rule", label: "The 20-20-20 rule" },
+      { href: "/eye-strain-risk-calculator", label: "Eye strain calculator" },
+      { href: "/manifesto", label: "Manifesto" },
+    ],
+  },
+  {
+    title: "Small print",
+    links: [
+      { href: "/privacy", label: "Privacy" },
+      { href: "/terms", label: "Terms" },
+      { href: `mailto:${CONTACT_EMAIL}`, label: CONTACT_EMAIL },
+    ],
+  },
+];
+---
+
+<footer class="site-footer">
+  <div class="page grid">
+    <div class="about">
+      <a class="brand" href="/"><Mark /><span>GazeKeeper</span></a>
+      <p>A break reminder for the Mac that waits for the right moment.</p>
+      <p class="mono">{CURRENT_VERSION} · {MACOS_REQUIREMENT}+ · Free</p>
+    </div>
+    {
+      columns.map((col) => (
+        <nav aria-label={col.title}>
+          <p class="mono">{col.title}</p>
+          <ul role="list">
+            {col.links.map((link) => (
+              <li>
+                <a href={link.href}>{link.label}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))
+    }
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: 72px 56px;
+    border-top: 1px solid var(--rule);
+    font-size: 14px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 2fr repeat(3, 1fr);
+    gap: 40px;
+  }
+
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: var(--ink-2);
+    max-width: 32ch;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  nav a {
+    color: var(--ink-2);
+    transition: color 150ms ease;
+  }
+
+  nav a:hover {
+    color: var(--ink);
+  }
+
+  @media (max-width: 760px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .about {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

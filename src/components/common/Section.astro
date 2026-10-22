@@ -1,0 +1,48 @@
+---
+interface Props {
+  title?: string;
+  subtext?: string;
+  class?: string;
+}
+
+const { title, subtext, class: className } = Astro.props;
+---
+
+<section class:list={["page section", className]}>
+  {
+    (title || subtext) && (
+      <header class="head">
+        {title && <h2 class="title">{title}</h2>}
+        {subtext && <p class="lede">{subtext}</p>}
+      </header>
+    )
+  }
+  <slot />
+</section>
+
+<style>
+  .section {
+    padding-block: clamp(64px, 8vw, 112px);
+  }
+
+  .section + .section {
+    border-top: 1px solid var(--rule);
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px 64px;
+    margin-bottom: clamp(32px, 4vw, 56px);
+  }
+
+  .title {
+    max-width: 20ch;
+  }
+
+  .lede {
+    max-width: 40ch;
+  }
+</style>

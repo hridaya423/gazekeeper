@@ -1,0 +1,62 @@
+---
+import SiteShell from "../layouts/SiteShell.astro";
+import PageHero from "../components/common/PageHero.astro";
+import Section from "../components/common/Section.astro";
+import CtaBand from "../components/common/CtaBand.astro";
+---
+
+<SiteShell
+  title="Manifesto — GazeKeeper"
+  description="Software should protect attention, not just consume it. The principles GazeKeeper is built on."
+>
+  <PageHero
+    title="Attention is the asset. Act accordingly."
+    subtext="GazeKeeper exists because software spends your attention all day and almost nothing helps you keep it."
+  />
+
+  <Section>
+    <div class="prose">
+      <p>
+        Every app on your Mac competes for the same finite resource. Notifications, badges, sync popups, “quick
+        questions.” The industry built an economy on interrupting you, then shipped wellness features as an apology.
+      </p>
+      <p>
+        A utility earns its place in your menu bar by being boring in the best sense. It does one job, at the right
+        moments, and otherwise disappears. That belief produces four commitments.
+      </p>
+
+      <h2>Interruption is a cost, never a feature</h2>
+      <p>
+        A break reminder has to interrupt you, so it should interrupt as little as it can. GazeKeeper gives 60 seconds’
+        notice, then waits for a pause in your typing. It holds the break while a camera or microphone is in use, while
+        you share your screen, and while an app is fullscreen. You can snooze or skip.
+      </p>
+
+      <h2>Free, with nothing held hostage</h2>
+      <p>
+        GazeKeeper is free. There is no trial clock, no paid tier, and no account standing between you and the download.
+      </p>
+
+      <h2>Your data stays on your Mac</h2>
+      <p>
+        Settings and statistics live on your Mac. GazeKeeper checks whether the camera, microphone, or a screen share is
+        in use, which app is in front, and how long since your last keypress. It never reads what you type or say. The
+        only network request the app makes is the update check.
+      </p>
+
+      <h2>Health claims deserve humility</h2>
+      <p>
+        We cite research where it exists and say where it disagrees. The evidence for the <a href="/20-20-20-rule"
+          >20-20-20 rule</a
+        > is mixed: one trial found break reminders eased symptoms, and another found scheduled breaks did not. A break app
+        cannot promise to protect your vision. It can get you to look away on a schedule, and that is the only promise this
+        one makes.
+      </p>
+
+      <h2>Twenty seconds is the ask</h2>
+      <p>Look at something far away. Let your shoulders drop. Blink. The screen will still be there when you get back.</p>
+    </div>
+  </Section>
+
+  <CtaBand title="Try it for a day." subtext="Free, with no account." />
+</SiteShell>

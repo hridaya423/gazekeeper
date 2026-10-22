@@ -1,0 +1,57 @@
+@font-face {
+  font-family: "Optician Sans";
+  src: url("/fonts/optician-sans.woff2") format("woff2");
+  font-display: block;
+}
+
+:root {
+  color-scheme: light dark;
+
+  --paper: #ffffff;
+  --wash: #f3f5f4;
+  --rule: #e4e7e5;
+  --rule-strong: #cdd3d0;
+  --ink: #0e1110;
+  --ink-2: #4a514e;
+  --ink-3: #636a67;
+  --ink-4: #8a918e;
+  --teal: #0e7c72;
+  --on-ink: #ffffff;
+
+  --night: #0e1110;
+  --night-ink: #f2f4f3;
+  --night-ink-2: #a3aba7;
+  --night-teal: #5fc4b8;
+
+  --font-chart: "Optician Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-sans:
+    "Geist Variable", ui-sans-serif, -apple-system, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --page-pad: clamp(20px, 4vw, 56px);
+  --page-max: 1440px;
+  --measure: 62ch;
+
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-pill: 999px;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-move: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0e1110;
+    --wash: #151918;
+    --rule: #232826;
+    --rule-strong: #343b38;
+    --ink: #f2f4f3;
+    --ink-2: #a3aba7;
+    --ink-3: #8e9692;
+    --ink-4: #646b68;
+    --teal: #5fc4b8;
+    --on-ink: #0e1110;
+    --night: #060807;
+  }
+}

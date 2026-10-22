@@ -1,0 +1,154 @@
+---
+import SiteShell from "../layouts/SiteShell.astro";
+import PageHero from "../components/common/PageHero.astro";
+import Section from "../components/common/Section.astro";
+import { CURRENT_VERSION, DMG_URL, MACOS_REQUIREMENT } from "../utils/site";
+
+const requirements = [
+  { label: "Version", value: CURRENT_VERSION },
+  { label: "System", value: `${MACOS_REQUIREMENT} or later, Apple silicon` },
+  { label: "Price", value: "Free. No account, no subscription." },
+  { label: "Updates", value: "In the app, through Sparkle. That check is the only network request GazeKeeper makes." },
+];
+
+const steps = [
+  {
+    title: "A quiet heads-up",
+    body: "By default, one minute before a break, a slim pill gives you time to finish the sentence you are in.",
+  },
+  {
+    title: "The screen takes over",
+    body: "An overlay with a countdown covers every display. Look past the monitor.",
+  },
+  {
+    title: "Pause, snooze or skip",
+    body: "Use the menu bar to pause, snooze or skip. A call, a screen share or a fullscreen app holds the break on its own.",
+  },
+];
+---
+
+<SiteShell
+  title="Download GazeKeeper for Mac"
+  description={`Download GazeKeeper ${CURRENT_VERSION} for ${MACOS_REQUIREMENT} or later. Free, with no account.`}
+>
+  <PageHero title="Download GazeKeeper." subtext="Free, with no account. It runs in your menu bar.">
+    <div class="actions">
+      <a class="btn" href={DMG_URL}>Download for Mac</a>
+      <span class="mono">{CURRENT_VERSION} · {MACOS_REQUIREMENT}+</span>
+    </div>
+  </PageHero>
+
+  <Section title="Requirements">
+    <dl class="rows">
+      {
+        requirements.map((r) => (
+          <div>
+            <dt class="mono">{r.label}</dt>
+            <dd>{r.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </Section>
+
+  <Section
+    title="Installing a build that is not notarized yet"
+    subtext="Apple has not notarized GazeKeeper yet, so macOS warns you the first time you open it."
+  >
+    <ol role="list" class="install">
+      <li>Open the DMG and drag GazeKeeper into Applications.</li>
+      <li>Open GazeKeeper from Applications.</li>
+      <li>
+        If macOS refuses, open System Settings, then Privacy &amp; Security, and choose Open Anyway next to GazeKeeper.
+      </li>
+    </ol>
+  </Section>
+
+  <Section title="The first run" subtext="A short setup shows you what a break looks like.">
+    <ol role="list" class="steps">
+      {
+        steps.map((s, i) => (
+          <li>
+            <span class="chart">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </Section>
+</SiteShell>
+
+<style>
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+  }
+
+  .rows {
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .rows div {
+    display: grid;
+    grid-template-columns: minmax(120px, 1fr) 3fr;
+    gap: 8px 32px;
+    padding-block: 18px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rows dd {
+    max-width: var(--measure);
+  }
+
+  .install {
+    display: grid;
+    gap: 16px;
+    max-width: var(--measure);
+    padding-left: 1.4em;
+    list-style: decimal;
+    color: var(--ink-2);
+    font-size: 17px;
+  }
+
+  .install li::marker {
+    font-family: var(--font-mono);
+    color: var(--ink-3);
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .steps li {
+    display: grid;
+    align-content: start;
+    gap: 12px;
+    padding: 28px 32px 8px 0;
+  }
+
+  .steps .chart {
+    font-size: clamp(56px, 7vw, 96px);
+    line-height: 1;
+  }
+
+  .steps h3 {
+    font-size: 20px;
+    letter-spacing: -0.01em;
+  }
+
+  .steps p {
+    color: var(--ink-2);
+    max-width: 34ch;
+  }
+
+  @media (max-width: 640px) {
+    .rows div {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,119 @@
+---
+import Mark from "./Mark.astro";
+
+const links = [
+  { href: "/#timing", label: "How it works" },
+  { href: "/#evidence", label: "The evidence" },
+  { href: "/docs", label: "Docs" },
+  { href: "/compare", label: "Compare" },
+];
+
+const current = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <nav class="page bar" aria-label="Main">
+    <a class="brand" href="/" aria-label="GazeKeeper home">
+      <Mark />
+      <span>GazeKeeper</span>
+    </a>
+    <ul role="list" class="links">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              aria-current={current !== "/" && link.href.startsWith(current) ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a class="btn cta" href="/download">Download</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .site-header::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 -28px;
+    z-index: -1;
+    background: linear-gradient(
+      var(--paper) 55%,
+      color-mix(in oklab, var(--paper) 0%, transparent)
+    );
+    backdrop-filter: blur(10px);
+    mask-image: linear-gradient(#000 60%, transparent);
+    pointer-events: none;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    min-height: 68px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .links {
+    display: flex;
+    gap: 28px;
+    margin-left: auto;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+
+  .links a {
+    display: inline-block;
+    padding-block: 10px;
+    transition: color 150ms ease;
+  }
+
+  .links a:hover,
+  .links a[aria-current="page"] {
+    color: var(--ink);
+  }
+
+  .cta {
+    min-height: 38px;
+    padding-inline: 16px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 720px) {
+    .bar {
+      flex-wrap: wrap;
+      gap: 0 16px;
+      padding-top: 8px;
+    }
+
+    .cta {
+      margin-left: auto;
+    }
+
+    .links {
+      order: 3;
+      width: 100%;
+      margin: 0;
+      gap: 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+  }
+</style>

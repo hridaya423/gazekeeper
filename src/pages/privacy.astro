@@ -1,0 +1,88 @@
+---
+import SiteShell from "../layouts/SiteShell.astro";
+import PageHero from "../components/common/PageHero.astro";
+import { CONTACT_EMAIL } from "../utils/site";
+---
+
+<SiteShell
+  title="Privacy Policy — GazeKeeper"
+  description="GazeKeeper has no account, no analytics and no telemetry. Your data stays on your Mac. The only network request is the update check."
+>
+  <PageHero title="Privacy policy" subtext="GazeKeeper keeps your data on your Mac. The developer receives none of it." />
+
+  <section class="page legal">
+    <div class="prose">
+      <p class="mono">Last updated: October 2026</p>
+
+      <h2>The short version</h2>
+      <p>
+        GazeKeeper is free and has no account. It has no analytics and no telemetry. Your break history, statistics and
+        settings are stored on your Mac. The only network request the app makes is its check for updates.
+      </p>
+
+      <h2>What the app stores</h2>
+      <p>
+        Settings and the event log are saved in <code>~/Library/Application Support/GazeKeeper</code>. The event log
+        records break events, such as a break starting or being skipped, with a time and an optional reason. Quit the app
+        and delete that folder to remove it. Exporting stats writes a file to the place you choose. The developer
+        operates no service that could receive any of this.
+      </p>
+
+      <h2>What the app reads</h2>
+      <p>The app reads system state to decide when to hold a break:</p>
+      <ul>
+        <li>Whether a camera or microphone is in use. It does not read what they capture.</li>
+        <li>Whether a macOS screen-sharing or recording service has a window open.</li>
+        <li>Which app is in front, and whether its window fills the screen. It does not read window contents.</li>
+        <li>
+          How long ago you last used the keyboard or pointer. It does not read keystrokes. It needs no Accessibility
+          permission.
+        </li>
+      </ul>
+
+      <h2>Permissions</h2>
+      <ul>
+        <li>
+          <strong>Notifications</strong> (optional). Used for a heads-up banner when a fullscreen app hides the heads-up
+          pill.
+        </li>
+        <li>
+          <strong>Calendar</strong> (optional, off by default). macOS calls this permission full access to events.
+          GazeKeeper uses it only to read the start times of upcoming meetings. It does not change events. It does not
+          save or send them.
+        </li>
+      </ul>
+
+      <h2>Updates</h2>
+      <p>
+        GazeKeeper uses Sparkle to check for updates. Each check requests the appcast file from this site over HTTPS.
+        Like any web request, it reveals your IP address and the app version to the server. It does not send usage data
+        or an identifier. Downloading an update fetches the new disk image from this site.
+      </p>
+
+      <h2>Purchases</h2>
+      <p>There are none. GazeKeeper is free, so there are no payment details and no customer database.</p>
+
+      <h2>This website</h2>
+      <p>
+        This site is static files. It sets no cookies and runs no analytics or tracking scripts. The 20-20-20 timer
+        keeps its state in your browser's session storage. It is not sent anywhere.
+      </p>
+
+      <h2>Children</h2>
+      <p>GazeKeeper collects no personal information from anyone, including children.</p>
+
+      <h2>Changes</h2>
+      <p>If this policy changes, the date above changes with it.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about privacy: <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+    </div>
+  </section>
+</SiteShell>
+
+<style>
+  .legal {
+    padding-block: clamp(48px, 6vw, 88px);
+  }
+</style>

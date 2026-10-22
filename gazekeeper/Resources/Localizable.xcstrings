@@ -1,0 +1,431 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "%@ shortcut" : {
+
+    },
+    "%@…" : {
+
+    },
+    "%lld" : {
+
+    },
+    "%lld day streak, %lld breaks this week, average score %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld day streak, %2$lld breaks this week, average score %3$@"
+          }
+        }
+      }
+    },
+    "%lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "%lld of 100, discipline %lld, adherence %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld of 100, discipline %2$lld, adherence %3$lld"
+          }
+        }
+      }
+    },
+    "%lld seconds" : {
+
+    },
+    "%lld/%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld/%2$lld"
+          }
+        }
+      }
+    },
+    "%lld:%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld:%2$@"
+          }
+        }
+      }
+    },
+    "+5m" : {
+
+    },
+    "1 hour" : {
+
+    },
+    "10 minutes" : {
+
+    },
+    "15 minutes" : {
+
+    },
+    "20" : {
+
+    },
+    "30 minutes" : {
+
+    },
+    "5 minutes" : {
+
+    },
+    "A break that would land in the last two minutes before a meeting is offered just before it starts instead." : {
+
+    },
+    "Add Message" : {
+
+    },
+    "Add app" : {
+
+    },
+    "Allow Esc to skip" : {
+
+    },
+    "App rules" : {
+
+    },
+    "As soon as you pause…" : {
+
+    },
+    "Back" : {
+
+    },
+    "Break in " : {
+
+    },
+    "Break message %lld" : {
+
+    },
+    "Break overlay" : {
+
+    },
+    "Break time remaining" : {
+
+    },
+    "Breaks" : {
+
+    },
+    "Breaks are paused." : {
+
+    },
+    "Breaks taken, skipped, and today's screen score." : {
+
+    },
+    "Cadence check" : {
+
+    },
+    "Cadence suggestion" : {
+
+    },
+    "Calendar" : {
+
+    },
+    "Calendar access is off — nothing will be scheduled around meetings." : {
+
+    },
+    "Cancels the upcoming break and starts the timer over" : {
+
+    },
+    "Chime when a break ends" : {
+
+    },
+    "Clear" : {
+
+    },
+    "Clear %@" : {
+
+    },
+    "Continue" : {
+
+    },
+    "Couldn't register — shortcut already taken" : {
+
+    },
+    "Dashboard" : {
+
+    },
+    "Dismiss" : {
+
+    },
+    "EYE BREAK" : {
+
+    },
+    "Enable nudges" : {
+
+    },
+    "Every display dims at once. Twenty seconds, then you're back." : {
+
+    },
+    "Export" : {
+
+    },
+    "Export stats" : {
+
+    },
+    "GazeKeeper holds breaks while this Focus is on." : {
+
+    },
+    "GazeKeeper watches the clock so your eyes don't have to. Every 20 minutes it dims the screen for a 20-second reset." : {
+
+    },
+    "General" : {
+
+    },
+    "Get started" : {
+
+    },
+    "How a break unfolds" : {
+
+    },
+    "How long to pause. Empty pauses until you resume." : {
+
+    },
+    "How long until the next break is due." : {
+
+    },
+    "Ignore" : {
+
+    },
+    "Indefinitely" : {
+
+    },
+    "LONG BREAK" : {
+
+    },
+    "Last 14 days" : {
+
+    },
+    "Launch at login" : {
+
+    },
+    "Lifts a manual pause. A Focus-driven pause lifts with the Focus." : {
+
+    },
+    "Limit to office hours" : {
+
+    },
+    "Look away. Blink. Shoulders down." : {
+
+    },
+    "Meet your\nnew rhythm." : {
+
+    },
+    "Message %lld" : {
+
+    },
+    "Minutes" : {
+
+    },
+    "Next break" : {
+
+    },
+    "Next break " : {
+
+    },
+    "Next break in %lld minute%@." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Next break in %1$lld minute%2$@."
+          }
+        }
+      }
+    },
+    "No app rules — hardware signals and fullscreen decide." : {
+
+    },
+    "No breaks yet today" : {
+
+    },
+    "Offer breaks before meetings" : {
+
+    },
+    "Office hours" : {
+
+    },
+    "On while focused" : {
+
+    },
+    "Open Settings" : {
+
+    },
+    "Past-midnight windows are supported; nudges pause inside this window." : {
+
+    },
+    "Pause" : {
+
+    },
+    "Pause breaks" : {
+
+    },
+    "Pause breaks in this Focus" : {
+
+    },
+    "Pause while %@" : {
+
+    },
+    "Paused" : {
+
+    },
+    "Pauses breaks — for a number of minutes, or until resumed when left empty." : {
+
+    },
+    "Postpone %@" : {
+
+    },
+    "Press Return to save an edited message" : {
+
+    },
+    "Press a key combination, Escape to cancel, Delete to clear" : {
+
+    },
+    "Pushes the next break out five minutes." : {
+
+    },
+    "Quiet hours" : {
+
+    },
+    "Record a new shortcut" : {
+
+    },
+    "Remove message %lld" : {
+
+    },
+    "Remove rule for %@" : {
+
+    },
+    "Resume breaks" : {
+
+    },
+    "Scheduling paused — countdown frozen" : {
+
+    },
+    "Score history for the last 14 days" : {
+
+    },
+    "Screen score today" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Shortcuts" : {
+
+    },
+    "Skip break" : {
+
+    },
+    "Smart pause" : {
+
+    },
+    "Snooze 5m" : {
+
+    },
+    "Snooze the next break" : {
+
+    },
+    "Start a break" : {
+
+    },
+    "Start now" : {
+
+    },
+    "Starts a GazeKeeper break right now." : {
+
+    },
+    "Step %lld of %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Step %1$lld of %2$lld"
+          }
+        }
+      }
+    },
+    "Time to next break" : {
+
+    },
+    "Today's stats" : {
+
+    },
+    "Today: %lld taken, %lld skipped, %lld worked through — score %lld of 100." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Today: %1$lld taken, %2$lld skipped, %3$lld worked through — score %4$lld of 100."
+          }
+        }
+      }
+    },
+    "Toggles breaks on this weekday" : {
+
+    },
+    "Until tomorrow" : {
+
+    },
+    "Weekly digest on Mondays" : {
+
+    },
+    "Wellness" : {
+
+    },
+    "What a break looks like" : {
+
+    },
+    "Windows past midnight are supported. No day selected means every day." : {
+
+    },
+    "You're set." : {
+
+    },
+    "Your score appears after your first break." : {
+
+    },
+    "breaks active" : {
+
+    },
+    "esc" : {
+
+    },
+    "min:sec" : {
+
+    },
+    "no breaks" : {
+
+    },
+    "of 100" : {
+
+    },
+    "seconds" : {
+
+    },
+    "to" : {
+
+    },
+    "to skip" : {
+
+    }
+  },
+  "version" : "1.0"
+}

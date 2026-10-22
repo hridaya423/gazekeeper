@@ -1,0 +1,295 @@
+---
+import SiteShell from "../layouts/SiteShell.astro";
+import PageHero from "../components/common/PageHero.astro";
+import Section from "../components/common/Section.astro";
+import CtaBand from "../components/common/CtaBand.astro";
+---
+
+<SiteShell
+  title="Eye Strain Risk Calculator — GazeKeeper"
+  description="Answer a few questions about your screen habits and see which ones add up. A rough guide, not a medical assessment."
+>
+  <PageHero
+    title="Eye strain risk calculator"
+    subtext="Answer a few questions about your screen habits and see which ones add up."
+  />
+
+  <Section class="calc">
+    <div class="calc-grid">
+      <form id="strain-form">
+        <h2 class="sr-only">Your habits</h2>
+        <div class="field">
+          <label for="screen-hours">
+            Daily screen time
+            <output class="mono" id="hours-out" for="screen-hours">8h</output>
+          </label>
+          <input type="range" id="screen-hours" name="screen-hours" min="1" max="16" step="1" value="8" />
+          <div class="range-scale mono" aria-hidden="true"><span>1h</span><span>8h</span><span>16h</span></div>
+        </div>
+
+        <div class="field">
+          <label for="breaks-hour">
+            Breaks taken per hour
+            <output class="mono" id="breaks-out" for="breaks-hour">0</output>
+          </label>
+          <input type="range" id="breaks-hour" name="breaks-hour" min="0" max="5" step="1" value="0" />
+          <div class="range-scale mono" aria-hidden="true"><span>0</span><span>2–3</span><span>5+</span></div>
+        </div>
+
+        <div class="field">
+          <label for="distance">
+            Distance from screen
+            <output class="mono" id="distance-out" for="distance">50 cm</output>
+          </label>
+          <input type="range" id="distance" name="distance" min="30" max="90" step="5" value="50" />
+          <div class="range-scale mono" aria-hidden="true"><span>30 cm</span><span>60 cm</span><span>90 cm</span></div>
+        </div>
+
+        <fieldset class="field">
+          <legend>Do you catch yourself staring without blinking?</legend>
+          <label class="option">
+            <input type="radio" name="blink" value="normal" checked />
+            Rarely
+          </label>
+          <label class="option">
+            <input type="radio" name="blink" value="rarely" />
+            Often
+          </label>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Which of these are true?</legend>
+          <label class="option">
+            <input type="checkbox" name="dry-eyes" />
+            My eyes often feel dry or gritty
+          </label>
+          <label class="option">
+            <input type="checkbox" name="night-mode" />
+            I use Night Shift or warm colours at night
+          </label>
+          <label class="option">
+            <input type="checkbox" name="blue-light" />
+            I wear blue-light filtering glasses
+          </label>
+        </fieldset>
+      </form>
+
+      <section class="result" id="strain-result" aria-labelledby="result-title">
+        <h2 class="mono" id="result-title">Your score</h2>
+        <div aria-live="polite">
+          <p class="score"><span id="strain-score">—</span><span class="mono">/100</span></p>
+          <p class="chart level" id="strain-level">answer to see</p>
+        </div>
+        <p class="lede" id="strain-message">Adjust the inputs and your score updates here.</p>
+        <ul role="list" class="tips" id="strain-tips"></ul>
+        <p class="mono">
+          A habit tally, not a diagnosis. If your eyes hurt or your vision changes, see an eye-care professional.
+        </p>
+      </section>
+    </div>
+  </Section>
+
+  <CtaBand
+    title="Want a reminder instead of a score?"
+    subtext="GazeKeeper counts down to your next break from the menu bar. It is free."
+  />
+</SiteShell>
+
+<script>
+  import { computeStrain, type StrainInputs } from "../scripts/strain";
+
+  const form = document.getElementById("strain-form") as HTMLFormElement | null;
+  const scoreEl = document.getElementById("strain-score");
+  const levelEl = document.getElementById("strain-level");
+  const messageEl = document.getElementById("strain-message");
+  const tipsEl = document.getElementById("strain-tips");
+
+  if (form && scoreEl && levelEl && messageEl && tipsEl) {
+    function readInputs(): StrainInputs {
+      const fd = new FormData(form!);
+      return {
+        screenHours: Number(fd.get("screen-hours")),
+        breaksPerHour: Number(fd.get("breaks-hour")),
+        distanceCm: Number(fd.get("distance")),
+        blinkRate: fd.get("blink") === "rarely" ? "rarely" : "normal",
+        dryEyes: fd.has("dry-eyes"),
+        nightMode: fd.has("night-mode"),
+        blueLightGlasses: fd.has("blue-light"),
+      };
+    }
+
+    function updateOutputs(): void {
+      const hours = document.getElementById("hours-out")!;
+      const breaks = document.getElementById("breaks-out")!;
+      const distance = document.getElementById("distance-out")!;
+      hours.textContent = `${(document.getElementById("screen-hours") as HTMLInputElement).value}h`;
+      breaks.textContent = (document.getElementById("breaks-hour") as HTMLInputElement).value;
+      distance.textContent = `${(document.getElementById("distance") as HTMLInputElement).value} cm`;
+    }
+
+    function render(): void {
+      updateOutputs();
+      const result = computeStrain(readInputs());
+      scoreEl!.textContent = String(result.score);
+      levelEl!.textContent = result.level.toLowerCase() + " risk";
+      messageEl!.textContent = result.message;
+
+      tipsEl!.innerHTML = "";
+      for (const tip of result.tips) {
+        const li = document.createElement("li");
+        const strong = document.createElement("strong");
+        strong.textContent = tip.title;
+        const p = document.createElement("span");
+        p.textContent = tip.body;
+        li.append(strong, p);
+        tipsEl!.append(li);
+      }
+    }
+
+    form.addEventListener("input", render);
+    render();
+  }
+</script>
+
+<style>
+  .calc-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(40px, 7vw, 112px);
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    .calc-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  form {
+    display: grid;
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .field {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+    margin: 0;
+    padding: 24px 0;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  fieldset.field {
+    display: block;
+  }
+
+  .field > label:not(.option),
+  legend {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0;
+    font-weight: 500;
+  }
+
+  legend {
+    float: left;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  legend + .option {
+    clear: both;
+  }
+
+  output {
+    color: var(--ink);
+  }
+
+  input[type="range"] {
+    width: 100%;
+    height: 44px;
+    margin: 0;
+    accent-color: var(--teal);
+    cursor: pointer;
+  }
+
+  .range-scale {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    color: var(--ink-2);
+    cursor: pointer;
+  }
+
+  .option input {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: var(--teal);
+  }
+
+  .result {
+    position: sticky;
+    top: 96px;
+    display: grid;
+    gap: 20px;
+    padding-top: 24px;
+    border-top: 1.5px solid var(--ink);
+  }
+
+  @media (max-width: 900px) {
+    .result {
+      position: static;
+    }
+  }
+
+  .score {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: clamp(72px, 9vw, 120px);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .score .mono {
+    font-size: 16px;
+    letter-spacing: 0;
+  }
+
+  .level {
+    margin-top: 8px;
+    font-size: 15px;
+    letter-spacing: 0.16em;
+    color: var(--teal);
+  }
+
+  .tips {
+    display: grid;
+    border-top: 1px solid var(--rule);
+  }
+
+  .tips :global(li) {
+    display: grid;
+    gap: 4px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .tips :global(span) {
+    color: var(--ink-2);
+  }
+</style>
