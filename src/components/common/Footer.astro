@@ -37,6 +37,7 @@ const columns = [
       <a class="brand" href="/"><Mark /><span>GazeKeeper</span></a>
       <p>A break reminder for the Mac that waits for the right moment.</p>
       <p class="mono">{CURRENT_VERSION} · {MACOS_REQUIREMENT}+ · Free</p>
+      <p><a class="credit" href="https://www.hridya.tech/projects/gazekeeper">Built by Hridya Agrawal</a></p>
     </div>
     {
       columns.map((col) => (
@@ -96,6 +97,13 @@ const columns = [
     transition: color 150ms ease;
   }
 
+.credit {
+    color: var(--ink-2);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .credit:hover,
   nav a:hover {
     color: var(--ink);
   }

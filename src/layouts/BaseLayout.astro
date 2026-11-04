@@ -2,6 +2,7 @@
 import "@fontsource-variable/geist";
 import "@fontsource-variable/geist-mono";
 import "../styles/base.css";
+import { CURRENT_VERSION, MACOS_REQUIREMENT } from "../utils/site";
 
 interface Props {
   title: string;
@@ -13,6 +14,33 @@ const { title, description = "GazeKeeper is a free Mac break reminder. It asks f
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("/images/og.png", Astro.site);
+const site = new URL("/", Astro.site).href;
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${site}#software`,
+      name: "GazeKeeper",
+      description: "A break reminder for the Mac that waits for the right moment.",
+      url: site,
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: `macOS ${MACOS_REQUIREMENT.replace(/^macOS\s*/i, "")} or later`,
+      softwareVersion: CURRENT_VERSION,
+      license: "https://www.apache.org/licenses/LICENSE-2.0",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      sameAs: ["https://github.com/hridaya423/gazekeeper", "https://www.hridya.tech/projects/gazekeeper"],
+      subjectOf: { "@type": "TechArticle", url: "https://www.hridya.tech/projects/gazekeeper" },
+      author: {
+        "@type": "Person",
+        "@id": "https://www.hridya.tech/#person",
+        name: "Hridya Agrawal",
+        url: "https://www.hridya.tech",
+      },
+    },
+    { "@type": "WebSite", "@id": `${site}#website`, url: site, name: "GazeKeeper" },
+  ],
+}).replace(/</g, "\\u003c");
 ---
 
 <!doctype html>
@@ -38,6 +66,8 @@ const ogImage = new URL("/images/og.png", Astro.site);
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="author" content="Hridya Agrawal" />
+    <script type="application/ld+json" set:html={jsonLd} />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
