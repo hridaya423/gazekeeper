@@ -17,7 +17,7 @@ echo "==> Version $MARKETING_VERSION ($CURRENT_PROJECT_VERSION)"
 
 SIGN_ARGS=(CODE_SIGNING_ALLOWED=NO)
 if [[ -n "${SIGNING_IDENTITY:-}" ]]; then
-  SIGN_ARGS=(CODE_SIGNING_ALLOWED=YES "CODE_SIGN_IDENTITY=${SIGNING_IDENTITY}" ENABLE_HARDENED_RUNTIME=YES)
+  SIGN_ARGS=(CODE_SIGNING_ALLOWED=YES "CODE_SIGN_IDENTITY=${SIGNING_IDENTITY}" ENABLE_HARDENED_RUNTIME=YES "DEVELOPMENT_TEAM=${DEVELOPMENT_TEAM:-}" CODE_SIGN_STYLE=Manual OTHER_CODE_SIGN_FLAGS=--timestamp CODE_SIGN_INJECT_BASE_ENTITLEMENTS=NO)
 fi
 
 echo "==> Building $CONFIG"
@@ -27,6 +27,19 @@ xcodebuild -project GazeKeeper.xcodeproj -scheme GazeKeeper -configuration "$CON
   "CURRENT_PROJECT_VERSION=${CURRENT_PROJECT_VERSION}" -quiet
 APP="$(ls -dt ~/Library/Developer/Xcode/DerivedData/GazeKeeper-*/Build/Products/"$CONFIG"/GazeKeeper.app | head -1)"
 [[ -d "$APP" ]] || { echo "GazeKeeper.app not found" >&2; exit 1; }
+
+if [[ -n "${SIGNING_IDENTITY:-}" ]]; then
+  echo "==> Signing Sparkle helpers"
+  SPARKLE="$APP/Contents/Frameworks/Sparkle.framework/Versions/B"
+  sign() { codesign --force --sign "$SIGNING_IDENTITY" --options runtime --timestamp "$@"; }
+  sign "$SPARKLE/XPCServices/Installer.xpc"
+  sign --preserve-metadata=entitlements "$SPARKLE/XPCServices/Downloader.xpc"
+  sign "$SPARKLE/Autoupdate"
+  sign "$SPARKLE/Updater.app"
+  sign "$APP/Contents/Frameworks/Sparkle.framework"
+  sign --preserve-metadata=entitlements "$APP"
+  codesign --verify --deep --strict "$APP"
+fi
 
 if [[ -n "${SIGNING_IDENTITY:-}" && -n "${NOTARY_PROFILE:-}" ]]; then
   echo "==> Notarizing"
