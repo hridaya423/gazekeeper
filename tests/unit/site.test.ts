@@ -23,11 +23,13 @@ describe("site config", () => {
     );
   });
 
-  test("release assets resolve on the site domain", () => {
+  test("release assets resolve to GitHub releases", () => {
     expect(releaseAssetUrl("v9.9.9")).toBe(
-      `${SITE_URL}/releases/GazeKeeper.v9.9.9.dmg`,
+      "https://github.com/hridaya423/gazekeeper/releases/download/v9.9.9/GazeKeeper.dmg",
     );
-    expect(DMG_URL).toBe(`${SITE_URL}/releases/GazeKeeper.dmg`);
+    expect(DMG_URL).toBe(
+      "https://github.com/hridaya423/gazekeeper/releases/latest/download/GazeKeeper.dmg",
+    );
     expect(APPCAST_URL).toBe(`${SITE_URL}/appcast.xml`);
   });
 

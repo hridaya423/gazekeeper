@@ -59,28 +59,28 @@ const timeline = [
   {
     at: "14:12:00",
     kind: "hold",
-    pos: 0.421,
+    pos: 0.429,
     title: "Camera turns on",
     body: "The countdown freezes with 8 minutes left. No banner, no sound.",
   },
   {
     at: "14:19:00",
-    kind: "cool",
-    pos: 0.667,
+    kind: "count",
+    pos: 0.679,
     title: "Call ends",
-    body: "A 30-second cooldown, so nothing arrives while you close windows.",
+    body: "The countdown continues from 8 minutes. Nothing appears yet.",
   },
   {
-    at: "14:26:30",
+    at: "14:26:00",
     kind: "heads",
-    pos: 0.93,
+    pos: 0.929,
     title: "Heads-up",
     body: "A small pill: break in 60 seconds. Take it now, snooze it, or let it come.",
   },
   {
-    at: "14:27:30",
+    at: "14:27:00",
     kind: "break",
-    pos: 0.965,
+    pos: 0.964,
     title: "The break",
     body: "It waits for 2 seconds without typing (never more than 30), then 20 seconds of distance.",
   },
@@ -234,7 +234,6 @@ const faqs = [
       <div class="track" aria-hidden="true">
         <span class="seg seg-count" style="--span:12">Counting</span>
         <span class="seg seg-hold" style="--span:7">On a call · clock frozen</span>
-        <span class="seg seg-cool" style="--span:0.5"></span>
         <span class="seg seg-count" style="--span:7">Counting</span>
         <span class="seg seg-heads" style="--span:1"></span>
         <span class="seg seg-lull" style="--span:0.4"></span>
@@ -761,10 +760,6 @@ const faqs = [
     box-shadow: inset 0 0 0 1px var(--rule-strong);
   }
 
-  .seg-cool {
-    background: var(--rule-strong);
-  }
-
   .seg-heads {
     background: var(--ink);
   }
@@ -882,13 +877,13 @@ const faqs = [
   }
 
   @keyframes countdown {
-    42.1% {
+    42.9% {
       --left: 8;
     }
-    66.7% {
+    67.9% {
       --left: 8;
     }
-    96.5%,
+    96.4%,
     100% {
       --left: 0;
     }

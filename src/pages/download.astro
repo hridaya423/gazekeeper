@@ -6,7 +6,7 @@ import { CURRENT_VERSION, DMG_URL, MACOS_REQUIREMENT } from "../utils/site";
 
 const requirements = [
   { label: "Version", value: CURRENT_VERSION },
-  { label: "System", value: `${MACOS_REQUIREMENT} or later, Apple silicon` },
+  { label: "System", value: `${MACOS_REQUIREMENT} or later, Apple silicon or Intel` },
   { label: "Price", value: "Free. No account, no subscription." },
   { label: "Updates", value: "In the app, through Sparkle. That check is the only network request GazeKeeper makes." },
 ];
@@ -52,15 +52,12 @@ const steps = [
   </Section>
 
   <Section
-    title="Installing a build that is not notarized yet"
-    subtext="Apple has not notarized GazeKeeper yet, so macOS warns you the first time you open it."
+    title="Install"
+    subtext="The app is signed with a Developer ID and notarized by Apple, so it opens without a warning."
   >
     <ol role="list" class="install">
       <li>Open the DMG and drag GazeKeeper into Applications.</li>
-      <li>Open GazeKeeper from Applications.</li>
-      <li>
-        If macOS refuses, open System Settings, then Privacy &amp; Security, and choose Open Anyway next to GazeKeeper.
-      </li>
+      <li>Open GazeKeeper from Applications. It appears in the menu bar.</li>
     </ol>
   </Section>
 

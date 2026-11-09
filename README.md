@@ -34,7 +34,7 @@ The [docs](src/content/docs/) describe every setting and its default.
 ## Requirements
 
 - macOS 14 or later.
-- The release DMG is built for Apple silicon.
+- The release DMG runs on Apple silicon and Intel Macs.
 
 ## Build the app
 
