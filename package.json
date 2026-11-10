@@ -4,6 +4,9 @@
   "version": "0.1.0",
   "license": "Apache-2.0",
   "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "astro dev --port 3100",
     "build": "astro build",
@@ -15,16 +18,16 @@
     "check-links": "node scripts/check-links.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.4.1",
+    "@astrojs/sitemap": "^3.7.4",
     "@fontsource-variable/geist": "^5.3.0",
-    "@fontsource-variable/geist-mono": "^5.2.5",
-    "astro": "^5.12.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "astro": "^7.4.8",
     "lucide-static": "^0.525.0"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.4",
-    "prettier": "^3.6.2",
-    "typescript": "~5.9.2",
-    "vitest": "^4.0.0"
+    "@astrojs/check": "^0.9.12",
+    "prettier": "^3.9.10",
+    "typescript": "~5.9.3",
+    "vitest": "^4.1.12"
   }
 }
